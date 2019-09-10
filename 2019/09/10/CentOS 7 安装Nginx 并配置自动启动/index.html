@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CentOS 7 安装Nginx 并配置自动启动 - 也想做你的超级英雄</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="1、官网下载安装包 http://nginx.org/en/download.html，选择适合Linux的版本，这里选择最新的版本，下载到本地后上传到服务器或者centos下直接wget命令下载。,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="也想做你的超级英雄" type="application/atom+xml"> 
+    <link rel="icon" href="/img/ioc.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">也想做你的超级英雄</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">CentOS 7 安装Nginx 并配置自动启动</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">CentOS 7 安装Nginx 并配置自动启动</h1>
+        <div class="stuff">
+            <span>九月 10, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="1、官网下载安装包"><a href="#1、官网下载安装包" class="headerlink" title="1、官网下载安装包"></a>1、官网下载安装包</h3><p> <a href="http://nginx.org/en/download.html，选择适合Linux的版本，这里选择最新的版本，下载到本地后上传到服务器或者centos下直接wget命令下载。" target="_blank" rel="noopener">http://nginx.org/en/download.html，选择适合Linux的版本，这里选择最新的版本，下载到本地后上传到服务器或者centos下直接wget命令下载。</a><br> 切换到/usr/local目录，下载软件包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cd /usr/local</span><br><span class="line"># wget http://nginx.org/download/nginx-1.11.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、安装nginx"><a href="#2、安装nginx" class="headerlink" title="2、安装nginx"></a>2、安装nginx</h3><p>先执行以下命令，安装nginx依赖库,如果缺少依赖库，可能会安装失败，具体可以参考文章后面的错误提示信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># yum install gcc-c++</span><br><span class="line"># yum install pcre</span><br><span class="line"># yum install pcre-devel</span><br><span class="line"># yum install zlib </span><br><span class="line"># yum install zlib-devel</span><br><span class="line"># yum install openssl</span><br><span class="line"># yum install openssl-devel</span><br></pre></td></tr></table></figure>
+
+<p> 解压安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf nginx-1.11.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p> nginx被解压到了/usr/local/nginx-1.11.5 目录下（不要把压缩包解压到/usr/local/nginx目录下，或者将解压后的目录重命名为nginx，因为nginx会默认安装到/usr/local/nginx目录下），切换到nginx-1.11.5/目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># cd /usr/local/nginx-1.11.5/</span><br></pre></td></tr></table></figure>
+
+<p>执行# ./configure</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ./configure</span><br></pre></td></tr></table></figure>
+
+<p>该操作会检测当前系统环境，以确保能成功安装nginx，执行该操作后可能会出现以下几种提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">checking for OS</span><br><span class="line"></span><br><span class="line"> + Linux 3.10.0-123.el7.x86_64 x86_64</span><br><span class="line"></span><br><span class="line">checking for C compiler ... not found</span><br><span class="line"></span><br><span class="line">./configure: error: C compiler cc is not found</span><br><span class="line"></span><br><span class="line">如果出现以上错误提示信息，执行yum install gcc-c++安装gcc，</span><br><span class="line"></span><br><span class="line">./configure: error: the HTTP rewrite module requires the PCRE library.</span><br><span class="line"></span><br><span class="line">You can either disable the module by using --without-http_rewrite_module</span><br><span class="line"></span><br><span class="line">option, or install the PCRE library into the system, or build the PCRE library</span><br><span class="line"></span><br><span class="line">statically from the source with nginx by using --with-pcre=&lt;path&gt; option.</span><br><span class="line"></span><br><span class="line">如果出现上面提示，表示缺少PCRE库</span><br><span class="line"></span><br><span class="line">./configure: error: the HTTP gzip module requires the zlib library.</span><br><span class="line"></span><br><span class="line">You can either disable the module by using --without-http_gzip_module</span><br><span class="line"></span><br><span class="line">option, or install the zlib library into the system, or build the zlib library</span><br><span class="line"></span><br><span class="line">statically from the source with nginx by using --with-zlib=&lt;path&gt; option.</span><br><span class="line"></span><br><span class="line">如果出现以上提示，表示缺少zlib库</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果没有出现./configure: error提示，表示当前环境可以安装nginx，执行make和make install编译nginx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># make</span><br><span class="line"># make install</span><br></pre></td></tr></table></figure>
+
+<p> 没有出错的话，表示nginx已经成功安装完成，默认安装位置为/usr/local/nginx,之前的/usr/local/nginx-1.11.5/可以删除掉了。</p>
+<p>如果出现cp: ‘conf/koi-win’ and ‘/usr/local/nginx/conf/koi-win’ are the same file，可能是你把安装包解压到了/usr/local/nginx目录，解决办法是将该目录重命名为其他名称后再执行make,make install.</p>
+<h3 id="3、配置nginx开机启动"><a href="#3、配置nginx开机启动" class="headerlink" title="3、配置nginx开机启动"></a>3、配置nginx开机启动</h3><p>切换到/lib/systemd/system/目录，创建nginx.service文件vim nginx.service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cd /lib/systemd/system/</span><br><span class="line"># vim nginx.service</span><br></pre></td></tr></table></figure>
+
+<p>文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx </span><br><span class="line">After=network.target </span><br><span class="line">   </span><br><span class="line">[Service] </span><br><span class="line">Type=forking </span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx quit</span><br><span class="line">PrivateTmp=true </span><br><span class="line">   </span><br><span class="line">[Install] </span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>退出并保存文件，执行systemctl enable nginx.service使nginx开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、验证是否安装成功"><a href="#4、验证是否安装成功" class="headerlink" title="4、验证是否安装成功"></a>4、验证是否安装成功</h3><p>输入http://服务器IP/ 如果能看到nginx的界面，就表示安装成功了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service    启动nginx</span><br><span class="line"></span><br><span class="line">systemctl stop nginx.service    结束nginx</span><br><span class="line"></span><br><span class="line">systemctl restart nginx.service    重启nginx</span><br><span class="line"></span><br><span class="line">source ~/.bashrc  刷新配置文件</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

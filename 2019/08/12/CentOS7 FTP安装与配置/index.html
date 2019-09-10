@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CentOS7 FTP安装与配置 - 也想做你的超级英雄</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="1、FTP的安装1234567891011121314#安装yum install -y vsftpd#设置开机启动systemctl enable vsftpd.service#启动systemc,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="也想做你的超级英雄" type="application/atom+xml"> 
+    <link rel="icon" href="/img/ioc.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">也想做你的超级英雄</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">CentOS7 FTP安装与配置</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">CentOS7 FTP安装与配置</h1>
+        <div class="stuff">
+            <span>八月 12, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ftp/">ftp</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="1、FTP的安装"><a href="#1、FTP的安装" class="headerlink" title="1、FTP的安装"></a>1、FTP的安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#安装</span><br><span class="line">yum install -y vsftpd</span><br><span class="line"></span><br><span class="line">#设置开机启动</span><br><span class="line">systemctl enable vsftpd.service</span><br><span class="line"></span><br><span class="line">#启动</span><br><span class="line">systemctl start vsftpd.service</span><br><span class="line"></span><br><span class="line">#停止</span><br><span class="line">systemctl stop vsftpd.service</span><br><span class="line"></span><br><span class="line">#查看状态</span><br><span class="line">systemctl status vsftpd.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、配置FTP"><a href="#2、配置FTP" class="headerlink" title="2、配置FTP"></a>2、配置FTP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#打开配置文件</span><br><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line"></span><br><span class="line">#显示行号</span><br><span class="line">:set number</span><br><span class="line"></span><br><span class="line">#修改配置 12 行</span><br><span class="line">anonymous_enable=NO</span><br><span class="line"></span><br><span class="line">#修改配置 33 行</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"></span><br><span class="line">#修改配置48行</span><br><span class="line">chown_uploads=YES</span><br><span class="line"></span><br><span class="line">#修改配置72行</span><br><span class="line">async_abor_enable=YES</span><br><span class="line"></span><br><span class="line">#修改配置82行</span><br><span class="line">ascii_upload_enable=YES</span><br><span class="line"></span><br><span class="line">#修改配置83行</span><br><span class="line">ascii_download_enable=YES</span><br><span class="line"></span><br><span class="line">#修改配置86行</span><br><span class="line">ftpd_banner=Welcome to blah FTP service.</span><br><span class="line"></span><br><span class="line">#修改配置100行</span><br><span class="line">chroot_local_user=YES</span><br><span class="line"></span><br><span class="line">#添加下列内容到vsftpd.conf末尾</span><br><span class="line">use_localtime=YES</span><br><span class="line">listen_port=21</span><br><span class="line">idle_session_timeout=300</span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=vsftpd</span><br><span class="line">user_config_dir=/etc/vsftpd/vconf</span><br><span class="line">data_connection_timeout=1</span><br><span class="line">virtual_use_local_privs=YES</span><br><span class="line">pasv_min_port=40000</span><br><span class="line">pasv_max_port=40010</span><br><span class="line">accept_timeout=5</span><br><span class="line">connect_timeout=1</span><br><span class="line">allow_writeable_chroot=YES</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、建立用户文件"><a href="#3、建立用户文件" class="headerlink" title="3、建立用户文件"></a>3、建立用户文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#创建编辑用户文件</span><br><span class="line"></span><br><span class="line">vim /etc/vsftpd/virtusers</span><br><span class="line">#第一行为用户名，第二行为密码。不能使用root作为用户名 </span><br><span class="line"></span><br><span class="line">leo</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、生成用户数据文件"><a href="#4、生成用户数据文件" class="headerlink" title="4、生成用户数据文件"></a>4、生成用户数据文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db_load -T -t hash -f /etc/vsftpd/virtusers /etc/vsftpd/virtusers.db</span><br><span class="line"></span><br><span class="line">#设定PAM验证文件，并指定对虚拟用户数据库文件进行读取</span><br><span class="line"></span><br><span class="line">chmod 600 /etc/vsftpd/virtusers.db</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、修改-etc-pam-d-vsftpd-文件"><a href="#5、修改-etc-pam-d-vsftpd-文件" class="headerlink" title="5、修改 /etc/pam.d/vsftpd 文件"></a>5、修改 /etc/pam.d/vsftpd 文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 修改前先备份 </span><br><span class="line"></span><br><span class="line">cp /etc/pam.d/vsftpd /etc/pam.d/vsftpd.bak</span><br><span class="line"></span><br><span class="line">vi /etc/pam.d/vsftpd</span><br><span class="line">#先将配置文件中原有的 auth 及 account 的所有配置行均注释掉</span><br><span class="line">auth sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/virtusers </span><br><span class="line">account sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/virtusers </span><br><span class="line"></span><br><span class="line"># 如果系统为32位，上面改为lib</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、新建系统用户vsftpd，用户目录为-home-vsftpd"><a href="#6、新建系统用户vsftpd，用户目录为-home-vsftpd" class="headerlink" title="6、新建系统用户vsftpd，用户目录为/home/vsftpd"></a>6、新建系统用户vsftpd，用户目录为/home/vsftpd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#用户登录终端设为/bin/false(即：使之不能登录系统)</span><br><span class="line">useradd vsftpd -d /home/vsftpd -s /bin/false</span><br><span class="line">chown -R vsftpd:vsftpd /home/vsftpd</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、建立虚拟用户个人配置文件"><a href="#7、建立虚拟用户个人配置文件" class="headerlink" title="7、建立虚拟用户个人配置文件"></a>7、建立虚拟用户个人配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/vsftpd/vconf</span><br><span class="line">cd /etc/vsftpd/vconf</span><br><span class="line"></span><br><span class="line">#这里建立虚拟用户leo配置文件</span><br><span class="line">touch leo</span><br><span class="line"></span><br><span class="line">#编辑leo用户配置文件，内容如下，其他用户类似</span><br><span class="line">vi leo</span><br><span class="line"></span><br><span class="line">local_root=/home/vsftpd/leo/</span><br><span class="line">write_enable=YES</span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#建立leo用户根目录</span><br><span class="line">mkdir -p /home/vsftpd/leo/</span><br></pre></td></tr></table></figure>
+
+<h3 id="8、防火墙设置"><a href="#8、防火墙设置" class="headerlink" title="8、防火墙设置"></a>8、防火墙设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">IPtables 的设置方式：</span><br><span class="line">vi /etc/sysconfig/iptables</span><br><span class="line">#编辑iptables文件，添加如下内容，开启21端口</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 21 -j ACCEPT</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 40000:40010 -j ACCEPT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">firewall 的设置方式：</span><br><span class="line">firewall-cmd --zone=public --add-service=ftp --permanent</span><br><span class="line"></span><br><span class="line">firewall-cmd --zone=public --add-port=21/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=40000-40010/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h3 id="9、重启vsftpd服务器"><a href="#9、重启vsftpd服务器" class="headerlink" title="9、重启vsftpd服务器"></a>9、重启vsftpd服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart vsftpd.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="10、使用ftp工具连接测试"><a href="#10、使用ftp工具连接测试" class="headerlink" title="10、使用ftp工具连接测试"></a>10、使用ftp工具连接测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这个时候，使用ftp的工具连接时，我们发现是可以连接的。传输文件的时候，会发现文件上传和下载都会出现</span><br><span class="line"></span><br><span class="line">500、503 、200等问题。这个时候，可以进行以下操作：</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式一、关闭SELINUX"><a href="#方式一、关闭SELINUX" class="headerlink" title="方式一、关闭SELINUX"></a>方式一、关闭SELINUX</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#打开SELINUX配置文件</span><br><span class="line">vim /etc/selinux/config</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改配置参数</span><br><span class="line">#注释  </span><br><span class="line">SELINUX=enforcing</span><br><span class="line"></span><br><span class="line">#增加  </span><br><span class="line">SELINUX=disabled</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改完成后，需要重启！</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式二、修改SELINUX"><a href="#方式二、修改SELINUX" class="headerlink" title="方式二、修改SELINUX"></a>方式二、修改SELINUX</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0 #暂时让SELinux进入Permissive模式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#列出与ftp相关的设置</span><br><span class="line">getsebool -a|grep ftp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#以下是显示出来的权限，off是关闭权限，on是打开权限。不同的机器显示的可能不一样。我看了我的显示的，和网上其他教程就不太一样</span><br><span class="line">ftp_home_dir --&gt; off</span><br><span class="line">ftpd_anon_write --&gt; off</span><br><span class="line">ftpd_connect_all_unreserved --&gt; off</span><br><span class="line">ftpd_connect_db --&gt; off</span><br><span class="line">ftpd_full_access --&gt; off</span><br><span class="line">ftpd_use_cifs --&gt; off</span><br><span class="line">ftpd_use_fusefs --&gt; off</span><br><span class="line">ftpd_use_nfs --&gt; off</span><br><span class="line">ftpd_use_passive_mode --&gt; off</span><br><span class="line">httpd_can_connect_ftp --&gt; off</span><br><span class="line">httpd_enable_ftp_server --&gt; off</span><br><span class="line">sftpd_anon_write --&gt; off</span><br><span class="line">sftpd_enable_homedirs --&gt; off</span><br><span class="line">sftpd_full_access --&gt; off</span><br><span class="line">sftpd_write_ssh_home --&gt; off</span><br><span class="line">tftp_anon_write --&gt; off</span><br><span class="line">tftp_home_dir --&gt; off</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#将包含有 ftp_home_dir 和 ftpd_full_access 相关的都设置为 1</span><br><span class="line"></span><br><span class="line">setsebool -P ftp_home_dir 1</span><br><span class="line">setsebool -P allow_ftpd_anon_write 1</span><br><span class="line">setsebool -P ftp_home_dir 1</span><br><span class="line"></span><br><span class="line">setenforce 1 #进入Enforcing模式</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式三、-SELINUX不对vsftp不做任何限制"><a href="#方式三、-SELINUX不对vsftp不做任何限制" class="headerlink" title="方式三、 SELINUX不对vsftp不做任何限制"></a>方式三、 SELINUX不对vsftp不做任何限制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setsebool -P ftpd_connect_all_unreserved 1</span><br></pre></td></tr></table></figure>
+
+<p>这个时候再使用工具连接，你发现，就可以正常的上传和下载文件了。<br>如果还是有问题尝试给我们用户的ftp目录，设置一下操作权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 775 /home/vsftpd/leo</span><br></pre></td></tr></table></figure>
+
+<p>原文转自:<a href="https://www.cnblogs.com/leoxuan/p/8329998.html" target="_blank" rel="noopener">https://www.cnblogs.com/leoxuan/p/8329998.html</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
